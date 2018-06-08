@@ -2,7 +2,7 @@
 
 let articles = [];
 
-function Article (rawDataObj) {
+function Article(rawDataObj) {
   this.author = rawDataObj.author;
   this.authorUrl = rawDataObj.authorUrl;
   this.title = rawDataObj.title;
@@ -11,7 +11,7 @@ function Article (rawDataObj) {
   this.publishedOn = rawDataObj.publishedOn;
 }
 
-Article.prototype.toHtml = function() {
+Article.prototype.toHtml = function () {
   // DONE: Use Handlebars to render your articles. Get your template from the DOM and "compile" your template with Handlebars.
 
   // 1. Get the template from the HTML document
@@ -24,7 +24,7 @@ Article.prototype.toHtml = function() {
   // Since your template can't hold any JS logic, we need to execute the logic here.
   // The result is added to the object as a new property, which can then be referenced by key in the template.
   // For example, you might want to display how old a post is, or say "(draft)" if it has no publication date:
-  this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
+  this.daysAgo = parseInt((new Date() - new Date(this.publishedOn)) / 60 / 60 / 24 / 1000);
 
   this.publishStatus = this.publishedOn ? `published ${this.daysAgo} days ago` : '(draft)';
 
@@ -40,8 +40,8 @@ Article.prototype.toHtml = function() {
 };
 
 // COMMENT: Why are there parentheses around "(a,b)" in the .sort() method, but not around the "articleObject" or "article" arguments in the .forEach() methods?
-// PUT YOUR RESPONSE HERE
-rawData.sort((a,b) => {
+// Response:  The reason the parentheses are around the (a,b) are not manipulating anything just has output.
+rawData.sort((a, b) => {
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
 });
 
