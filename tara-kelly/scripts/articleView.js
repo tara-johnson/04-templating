@@ -2,12 +2,13 @@
 
 let articleView = {};
 
-// TODO: Where possible, refactor methods into arrow functions, including the document.ready() method at the bottom.
+// DONE: Where possible, refactor methods into arrow functions, including the document.ready() method at the bottom.
 
-// COMMENT: How do arrow functions affect the context of "this"? How did you determine if a function could be refactored?  
-// Response: To be determined. 
+// COMMENT: How do arrow functions affect the context of "this"? How did you determine if a function could be refactored?
+// Response: Arrow functions have lexical scope and do not understand contextual this. We determined that the functions within the functions below could not be refactored into arrow function because of this (pun intended).
 
-articleView.populateFilters = function () {
+
+articleView.populateFilters = () => {
   $('article').each(function () {
     if (!$(this).hasClass('template')) {
       let val = $(this).find('address a').text();
@@ -25,16 +26,8 @@ articleView.populateFilters = function () {
     }
   });
 };
-//  Still working on this.
-// articles.forEach(article => {
-//   $('#articles').append(article.toHtml());
-// });
 
-// articleView.handleAuthorFilter(articleView => {
-//   $('#article-filter').on('change')
-// })
-
-articleView.handleAuthorFilter = function () {
+articleView.handleAuthorFilter = () => {
   $('#author-filter').on('change', function () {
     if ($(this).val()) {
       $('article').hide();
@@ -47,7 +40,7 @@ articleView.handleAuthorFilter = function () {
   });
 };
 
-articleView.handleCategoryFilter = function () {
+articleView.handleCategoryFilter = () => {
   $('#category-filter').on('change', function () {
     if ($(this).val()) {
       $('article').hide();
@@ -60,7 +53,7 @@ articleView.handleCategoryFilter = function () {
   });
 };
 
-articleView.handleMainNav = function () {
+articleView.handleMainNav = () => {
   $('nav').on('click', '.tab', function (e) {
     e.preventDefault();
     $('.tab-content').hide();
@@ -71,7 +64,7 @@ articleView.handleMainNav = function () {
 };
 
 
-articleView.setTeasers = function () {
+articleView.setTeasers = () => {
   $('.article-body *:nth-of-type(n+2)').hide();
   $('article').on('click', 'a.read-on', function (e) {
     e.preventDefault();
@@ -88,7 +81,7 @@ articleView.setTeasers = function () {
   });
 };
 
-$(document).ready(function () {
+$(document).ready(() => {
   articleView.populateFilters();
   articleView.handleCategoryFilter();
   articleView.handleAuthorFilter();
